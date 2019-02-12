@@ -20,9 +20,9 @@ import javax.servlet.http.HttpSession;
 public class CollegeCtrl {
   // fields
 
-  private String value1 = "Value 1 : This value is coming from controller";
-  private String value2 = "Value 2 : This value is coming from controller";
-  private String value3 = "Value 3 : This value is coming from controller";
+  private String value1 = "Value 1";
+  private String value2 = "Value 2";
+  private String value3 = "Value 3";
   private String value4 = "Value 4 : This value is coming from controller";
 
   private static final String viewPathPrefix = "/views/college";
