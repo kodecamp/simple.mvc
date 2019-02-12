@@ -1,0 +1,13 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+:root {
+    --footer-clr: #131313;
+    --footer-clr-light: #222222;
+    --pri-txt-clr: #777777;
+    --sec-txt-clr: #fb4106;
+    --sec-clr: #009bdd;
+    --header-height: 80px;
+}

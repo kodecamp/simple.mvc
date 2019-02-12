@@ -1,0 +1,56 @@
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: purple;
+  color: white;
+  height: 60px;
+}
+
+header ul.menu {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: 0;
+  line-height: 60px;
+}
+
+header ul.menu li {
+
+}
+
+header ul.menu li a {
+  display: block;
+  padding-left : 8px;
+  padding-right: 8px;
+  color: white;
+  margin: 0;
+
+}
+
+header ul.menu li a:hover {
+  background-color: #f1f1f1;
+  color: purple;
+}
+
+.message-panel {
+  margin: 4px;
+  padding: 4px;
+  border: 1px dashed tomato;
+  border-radius: 5px;
+}
+.info {
+  /*background-color: green;*/
+  color: green;
+  padding: 4px;
+  margin: 0;
+}
+
+.error {
+  /*background-color: tomato;*/
+  color: tomato;
+  padding: 4px;
+  margin: 0;
+}
+
