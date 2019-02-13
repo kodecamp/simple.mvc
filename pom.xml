@@ -5,7 +5,7 @@
   <groupId>com.kodecamp</groupId>
   <artifactId>simple.mvc</artifactId>
   <packaging>war</packaging>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.9</version>
   <name>simple.mvc</name>
   <url>http://maven.apache.org</url>
   <properties>
@@ -56,7 +56,43 @@
           <contextReloadable>true</contextReloadable>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+          <violationSeverity>warning</violationSeverity>
+          <encoding>UTF-8</encoding>
+          <configLocation>
+            ./src/main/resources/custom_checks.xml
+          </configLocation>
+        </configuration>
+        
+      </plugin>
     </plugins>
   </build>
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+          <violationSeverity>warning</violationSeverity>
+          <encoding>UTF-8</encoding>
+          <configLocation>
+            ./src/main/resources/custom_checks.xml
+          </configLocation>
+        </configuration>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>checkstyle</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+    </plugins>
+  </reporting>
 
 </project>

@@ -9,20 +9,27 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
 
-// simple class
-public class CollegeCtrl {
+/**
+ * <p>
+ * This class will be used for /college.
+ * </p>
+ *
+ * @author kcamp
+ */
+public final class CollegeCtrl {
   private static final String VIEW_PATH_PREFIX = "/views/college";
   // fields
 
   private final String value1 = "Value 1";
   private final String value2 = "Value 2";
   private final String value3 = "Value 3";
-  private final String value4 = "Value 4 : This value is coming from controller";
+  private final String value4 = "Value 4";
 
   private final List<UICollege> collegeList = new ArrayList<>(10);
 
@@ -35,7 +42,7 @@ public class CollegeCtrl {
    * @param resp instance of <tt>HttpServletResponse</tt>
    * @return list view
    */
-  public String list(HttpServletRequest req, HttpServletResponse resp) {
+  public String list(final HttpServletRequest req, final HttpServletResponse resp) {
     if (this.collegeList.isEmpty()) {
       this.collegeList.addAll(createDummyList(req, resp));
     }
@@ -47,7 +54,7 @@ public class CollegeCtrl {
    * This method will be used for urls like http://context/college/list.xhtml.
    * </p>
    *
-   * @param req instance of <tt>HttpServletRequest</tt>
+   * @param request instance of <tt>HttpServletRequest</tt>
    * @param resp instance of <tt>HttpServletResponse</tt>
    * @return list view
    */
@@ -119,6 +126,12 @@ public class CollegeCtrl {
 
   }
 
+  /**
+   * checks for duplicate values.
+   *
+   * @param req request
+   * @return boolean
+   */
   private boolean isValidOrDuplicate(final HttpServletRequest req) {
 
     final String regNo = req.getParameter("regNo");
@@ -135,6 +148,13 @@ public class CollegeCtrl {
     return isAnyEmpty;
   }
 
+  /**
+   * adds new value to list.
+   *
+   * @param req request
+   * @param resp resp
+   * @return string
+   */
   private String addValues(final HttpServletRequest req, final HttpServletResponse resp) {
 
     final UICollege newCollege = new UICollege(
@@ -195,6 +215,12 @@ public class CollegeCtrl {
     return view;
   }
 
+  /**
+   * executed on sucess.
+   *
+   * @param req request
+   * @return string
+   */
   private String onSuccess(final HttpServletRequest req) {
     MessageUtil.setMessages(req, new Message(
             Message.MSG_TYPE_INFO, "Record Updated Successfully."));
@@ -202,6 +228,12 @@ public class CollegeCtrl {
     return ":/college/list.xhtml";
   }
 
+  /**
+   * executed on failure.
+   *
+   * @param req request
+   * @return string
+   */
   private String onFailure(final HttpServletRequest req) {
     MessageUtil.setMessages(req,
             new Message(Message.MSG_TYPE_ERROR, "Please fill the reqired (*) fields."));
@@ -209,6 +241,12 @@ public class CollegeCtrl {
     return "/college/updateform.xhtml?regNo=" + req.getParameter("regNo");
   }
 
+  /**
+   * checks whether the form is valid or not.
+   *
+   * @param req request
+   * @return boolean
+   */
   private boolean isValidForm(final HttpServletRequest req) {
 
     final String regNo = req.getParameter("regNo");

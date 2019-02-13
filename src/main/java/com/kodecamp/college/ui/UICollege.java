@@ -1,28 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.kodecamp.college.ui;
 
 import com.kodecamp.college.db.College;
+
 import java.io.Serializable;
+
 import java.util.Objects;
 
 /**
+ * <p>
+ * This class is used as a model for taking data to view.
+ * </p>
  *
  * @author kcamp
  */
-public class UICollege implements Serializable {
+public final class UICollege implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
   private final College college;
   private String deleteUrl;
   private String updateUrl;
-  private static String DELETE_URL = "/college/delete.xhtml?regNo=%s";
-  private static String UPDATE_URL = "/college/updateform.xhtml?regNo=%s";
+  private static final String DELETE_URL = "/college/delete.xhtml?regNo=%s";
+  private static final String UPDATE_URL = "/college/updateform.xhtml?regNo=%s";
 
+  /**
+   * constructor.
+   *
+   * @param college instance of <tt>College</tt>
+   * @param contextPath string
+   */
   public UICollege(final College college, final String contextPath) {
     this.college = college;
     this.deleteUrl = String.format(contextPath + DELETE_URL, college.getRegNo());
@@ -41,23 +47,23 @@ public class UICollege implements Serializable {
     return this.updateUrl;
   }
 
-  public void setDeleteUrl(String deleteUrl) {
+  public void setDeleteUrl(final String deleteUrl) {
     this.deleteUrl = deleteUrl;
   }
 
-  public void setUpdateUrl(String updateUrl) {
+  public void setUpdateUrl(final String updateUrl) {
     this.updateUrl = updateUrl;
   }
-
 
   @Override
   public int hashCode() {
     int hash = 7;
+    hash = 97 * hash + Objects.hashCode(this.college);
     return hash;
   }
 
   @Override
-  public boolean equals(Object obj) {
+  public boolean equals(final Object obj) {
     if (this == obj) {
       return true;
     }
@@ -73,6 +79,7 @@ public class UICollege implements Serializable {
     }
     return true;
   }
+
 
 
 }

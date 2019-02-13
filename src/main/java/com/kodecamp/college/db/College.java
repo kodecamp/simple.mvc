@@ -1,22 +1,43 @@
 package com.kodecamp.college.db;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-public class College implements Serializable {
+/**
+ * <p>
+ * This is the entity class.
+ * </p>
+ *
+ * @author kcamp
+ */
+public final class College implements Serializable {
 
   private static final long serialVersionUID = 1L;
   private String regNo;
   private String name;
   private String address;
 
+  /**
+   * <p>
+   * constructor.
+   * </p>
+   *
+   * @param regNo <tt>String</tt>
+   */
   public College(final String regNo) {
     this.regNo = regNo;
     this.name = "";
     this.address = "";
   }
 
+  /**
+   * <p>
+   * primary constructor.
+   * </p>
+   *
+   * @param regNo registration no
+   * @param name name
+   * @param address address
+   */
   public College(final String regNo, final String name, final String address) {
     this.regNo = regNo;
     this.name = name;
@@ -35,15 +56,15 @@ public class College implements Serializable {
     return address;
   }
 
-  public void setRegNo(String regNo) {
+  public void setRegNo(final String regNo) {
     this.regNo = regNo;
   }
 
-  public void setName(String name) {
+  public void setName(final String name) {
     this.name = name;
   }
 
-  public void setAddress(String address) {
+  public void setAddress(final String address) {
     this.address = address;
   }
 
@@ -56,7 +77,7 @@ public class College implements Serializable {
   }
 
   @Override
-  public boolean equals(Object obj) {
+  public boolean equals(final Object obj) {
     if (this == obj) {
       return true;
     }
