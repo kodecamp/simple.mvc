@@ -86,7 +86,7 @@ public class CollegeCtrl {
    * @return list view
    */
   public String addform(final HttpServletRequest req, final HttpServletResponse resp) {
-    return this.VIEW_PATH_PREFIX + "/college_form.jsp";
+    return VIEW_PATH_PREFIX + "/college_form.jsp";
   }
 
   /**
