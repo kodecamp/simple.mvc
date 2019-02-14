@@ -8,7 +8,7 @@ import java.util.Objects;
 
 /**
  * <p>
- * This class is used as a model for taking data to view.
+ * This class is used as a model for taking data to view
  * </p>
  *
  * @author kcamp
