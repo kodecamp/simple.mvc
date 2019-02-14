@@ -22,6 +22,9 @@ public final class UICollege implements Serializable {
   private String updateUrl;
   private static final String DELETE_URL = "/college/delete.xhtml?regNo=%s";
   private static final String UPDATE_URL = "/college/updateform.xhtml?regNo=%s";
+  private static final int MAGIC_NUMBER1 = 7;
+  private static final int MAGIC_NUMBER2 = 97;
+
 
   /**
    * constructor.
@@ -57,8 +60,8 @@ public final class UICollege implements Serializable {
 
   @Override
   public int hashCode() {
-    int hash = 7;
-    hash = 97 * hash + Objects.hashCode(this.college);
+    int hash = MAGIC_NUMBER1;
+    hash = MAGIC_NUMBER2 * hash + Objects.hashCode(this.college);
     return hash;
   }
 

@@ -1,24 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.kodecamp.student.ui;
 
 import com.kodecamp.commons.ui.Message;
 import com.kodecamp.commons.ui.MessageUtil;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * This class is used for urls /student/*.
  *
  * @author kcamp
  */
-public class StudentCtrl {
+public final class StudentCtrl {
 
-  private String rollNo = "default roll no";
-  private String name = "defalt name";
-  private String address = "default address";
+  private final String rollNo = "default roll no";
+  private final String name = "defalt name";
+  private final String address = "default address";
 
 
   public String getRollNo() {
@@ -33,21 +30,44 @@ public class StudentCtrl {
     return address;
   }
 
+  /**
+   * constructor.
+   */
   public StudentCtrl() {
     System.out.println("Constructor : StudentCtrl");
 
   }
 
+  /**
+   * This method maps to student/list.xhtml.
+   *
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   * @return view
+   */
   public String list(final HttpServletRequest request, final HttpServletResponse response) {
 
     return "/views/student/student_list.jsp";
   }
 
+  /**
+   * This method maps to student/addform.xhtml.
+   *
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   * @return view
+   */
   public String addform(final HttpServletRequest request, final HttpServletResponse response) {
-    this.rollNo = "20";
     return "/views/student/add_form.jsp";
   }
 
+  /**
+   * This method maps to /student/addnew.xhtml.
+   *
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   * @return view
+   */
   public String addnew(final HttpServletRequest request, final HttpServletResponse response) {
     MessageUtil.setMessages(request, new Message(Message.MSG_TYPE_ERROR, "Sample Message"),
             new Message(Message.MSG_TYPE_INFO, "Sample Message"));

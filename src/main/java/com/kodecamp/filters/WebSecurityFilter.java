@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.kodecamp.filters;
 
 import com.kodecamp.user.db.UserInfo;
+
 import java.io.IOException;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -17,43 +14,59 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * This class intercepts the http request for *.jsp and *.xhtml.
+ *
+ * @author kcamp
+ */
 @WebFilter(filterName = "WebSecurityFilter", urlPatterns = {"*.jsp", "*.xhtml"},
         initParams = {
           @WebInitParam(name = "EXCLUDED_URLS", value = "/views/public,/css")})
-public class WebSecurityFilter implements Filter {
+public final class WebSecurityFilter implements Filter {
 
-  private static final String className = WebSecurityFilter.class.getName();
+  private static final String CLASS = WebSecurityFilter.class.getName();
 
+  /**
+   * constructor.
+   */
   public WebSecurityFilter() {
     System.out.println("$$$$ : Created : AuthenticationFilter");
   }
 
   @Override
-  public void doFilter(ServletRequest request,
-          ServletResponse response, FilterChain chain) throws IOException, ServletException {
+  public void doFilter(final ServletRequest request,
+          final ServletResponse response, final FilterChain chain)
+          throws IOException, ServletException {
 
     final HttpServletRequest httpReq = (HttpServletRequest) request;
 
     // checks for static resources and public urls
     if (isPublicResourceRequest(httpReq)) {
-      System.out.println(className + " : ### : Processing Public Request....");
+      System.out.println(CLASS + " : ### : Processing Public Request....");
       try {
         chain.doFilter(request, response);
       } catch (Exception ex) {
-        System.err.println(className + " @@@ Something went wrong while processing request : " + httpReq.getRequestURI());
+        System.err.println(CLASS + " @@@ Error Occured : " + httpReq.getRequestURI());
       }
       return;
     }
 
     if (!isAlreadyLoggedIn(httpReq)) {
-      System.out.println(className + " Not a valid user forwarding request to login page");
-      request.getRequestDispatcher(httpReq.getContextPath() + "/publicpages/loginform.xhtml").forward(request, response);
+      System.out.println(CLASS + " Not a valid user forwarding request to login page");
+      request.getRequestDispatcher(
+              httpReq.getContextPath() + "/publicpages/loginform.xhtml").forward(request, response);
       return;
     }
     chain.doFilter(request, response);
 
   }
 
+  /**
+   * This method checks whether the request is for public resource(/publicpages/* or /views/*.
+   *
+   * @param httpReq httprequest
+   * @return true or false
+   */
   private boolean isPublicResourceRequest(final HttpServletRequest httpReq) {
     final String requestUri = httpReq.getRequestURI();
     if (requestUri.startsWith(httpReq.getContextPath() + "/publicpages")
@@ -63,13 +76,18 @@ public class WebSecurityFilter implements Filter {
     return false;
   }
 
+  /**
+   * This method checks whether the request is authentic or not.
+   *
+   * @param httpReq request to be checked.
+   * @return true or false
+   */
   private boolean isAlreadyLoggedIn(final HttpServletRequest httpReq) {
     final UserInfo userInSession = (UserInfo) httpReq.getSession().getAttribute("userInfo");
-    System.out.println(className + " ### : Already Logged in : " + userInSession);
-    System.out.println(className + " ### : Session : " + httpReq.getSession());
+    System.out.println(CLASS + " ### : Already Logged in : " + userInSession);
+    System.out.println(CLASS + " ### : Session : " + httpReq.getSession());
     return userInSession == null ? false : true;
   }
-
 
   @Override
   public void destroy() {
@@ -77,18 +95,7 @@ public class WebSecurityFilter implements Filter {
   }
 
   @Override
-  public void init(FilterConfig filterConfig) throws ServletException {
-//    final String pathPrefixes = filterConfig.getInitParameter("EXCLUDED_PAGES");
-//    System.out.println("xxxxxxxxxxxxxxxxxxxxxx " + pathPrefixes);
-//    if ("".equals(pathPrefixes)) {
-//      return;
-//    }
-//    StringTokenizer tokenizer = new StringTokenizer(pathPrefixes, ",");
-//    List<String> tokens = new ArrayList<>();
-//    while (tokenizer.hasMoreTokens()) {
-//      tokens.add(tokenizer.nextToken());
-//    }
-//    this.execudedPaths = tokens;
+  public void init(final FilterConfig filterConfig) throws ServletException {
   }
 
 }

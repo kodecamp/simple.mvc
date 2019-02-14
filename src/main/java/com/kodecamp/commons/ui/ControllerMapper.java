@@ -23,16 +23,16 @@ public final class ControllerMapper {
   private ControllerMapper() {
   }
 
-  private static Map<String, Object> CONTROLLERMAP = new HashMap<>();
+  private static Map<String, Object> controllerMap = new HashMap<>();
 
   // static block : will be executed on class load time
   // before constructor
   static {
     System.out.println("### Controller Mappings Loaded....");
-    CONTROLLERMAP.put("college", new CollegeCtrl());
-    CONTROLLERMAP.put("student", new StudentCtrl());
-    CONTROLLERMAP.put("auth", new AuthCtrl());
-    CONTROLLERMAP.put("publicpages", new PublicPagesCtrl());
+    controllerMap.put("college", new CollegeCtrl());
+    controllerMap.put("student", new StudentCtrl());
+    controllerMap.put("auth", new AuthCtrl());
+    controllerMap.put("publicpages", new PublicPagesCtrl());
   }
 
   /**
@@ -43,7 +43,7 @@ public final class ControllerMapper {
    */
   public static Object getControllerInstance(final String controllerName) {
     try {
-      return CONTROLLERMAP.get(controllerName).getClass().newInstance();
+      return controllerMap.get(controllerName).getClass().newInstance();
     } catch (Exception ex) {
       Logger.getLogger(ControllerMapper.class.getName()).log(Level.SEVERE, null, ex);
     }

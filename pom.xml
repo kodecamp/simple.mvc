@@ -64,7 +64,7 @@
           <violationSeverity>warning</violationSeverity>
           <encoding>UTF-8</encoding>
           <configLocation>
-            ./src/main/resources/custom_checks.xml
+            ./src/main/resources/kodecamp_checks.xml
           </configLocation>
         </configuration>
         
@@ -81,7 +81,7 @@
           <violationSeverity>warning</violationSeverity>
           <encoding>UTF-8</encoding>
           <configLocation>
-            ./src/main/resources/custom_checks.xml
+            ./src/main/resources/kodecamp_checks.xml
           </configLocation>
         </configuration>
         <reportSets>

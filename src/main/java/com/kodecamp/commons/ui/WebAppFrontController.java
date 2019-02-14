@@ -14,20 +14,41 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class WebAppFrontController extends HttpServlet {
+/**
+ * This is the front controller for all the requests for url patters like *.jsp & *.xhtml.
+ *
+ * @author kcamp
+ */
+public final class WebAppFrontController extends HttpServlet {
 
-  private static final String className = WebAppFrontController.class.getName();
+
+  /**
+   * constructor.
+   */
   public WebAppFrontController() {
     System.out.println("### WebAppFrontControllerr : Constructor");
   }
 
+  /**
+   * init method : this method is called after constructor.
+   *
+   * @param config config object
+   */
   public void init(final ServletConfig config) {
     System.out.println("### WebAppFrontController : Initialized");
   }
 
-  protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+  /**
+   * This method processes the get or post requests.
+   *
+   * @param request httpservlet request
+   * @param response httpservlet response
+   * @throws ServletException throws exception if something goes wrong
+   * @throws IOException throws exception if unable to write response
+   */
+  protected void processRequest(final HttpServletRequest request, final HttpServletResponse response)
           throws ServletException, IOException {
-    System.out.println("=================================Start : Processing request===========================");
+    System.out.println("=============================Start : Processing request=====================");
     System.out.println("### Request Object : " + request);
     final String requestUri = request.getRequestURI();
     System.out.println("### Request Url : " + request.getRequestURL());
@@ -58,10 +79,11 @@ public class WebAppFrontController extends HttpServlet {
     //      System.out.println("type : " + type.newInstance());
     String view = "";
     try {
-      Object ctrlObj = preProcessRequest(request, controllerName);
+
       setUpMessages(request);
       setUpMenu(request, response);
       System.out.println("### Before Action Execution");
+      Object ctrlObj = preProcessRequest(request, controllerName);
       Method method = ctrlObj.getClass().getMethod(methodName, new Class[]{HttpServletRequest.class, HttpServletResponse.class});
       view = (String) method.invoke(ctrlObj, request, response);
       System.out.println("### After Action Execution");
@@ -85,6 +107,13 @@ public class WebAppFrontController extends HttpServlet {
 
   }
 
+  /**
+   * This method is called before processing the request.
+   *
+   * @param request HttpServletRequest
+   * @param controllerName HttpServletResponse
+   * @return object
+   */
   public Object preProcessRequest(final HttpServletRequest request, final String controllerName) {
     final HttpSession session = request.getSession();
     System.out.println("### Sessoin : " + session);
@@ -99,6 +128,11 @@ public class WebAppFrontController extends HttpServlet {
     return ctrlObj;
   }
 
+  /**
+   * This method is used for iniitalinng the messages.
+   *
+   * @param request HttpServletRequest
+   */
   private void setUpMessages(final HttpServletRequest request) {
     request.setAttribute("contextPath", request.getContextPath());
     final HttpSession session = request.getSession();
@@ -109,27 +143,35 @@ public class WebAppFrontController extends HttpServlet {
     }
   }
 
+  /**
+   * This method is used for creating customized menus(after login).
+   *
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   */
   private void setUpMenu(final HttpServletRequest request, final HttpServletResponse response) {
     System.out.println("### Setting Up Global Menu From Config Params");
     final HttpSession session = request.getSession();
     Map<String, String> menus = (Map<String, String>) session.getAttribute("menus");
     if (menus == null) {
       menus = new HashMap<>();
-      menus.put("Show Colleges", response.encodeURL(request.getContextPath() + "/college/list.xhtml"));
-      menus.put("Add New College", response.encodeURL(request.getContextPath() + "/college/addform.xhtml"));
+      menus.put("Show Colleges",
+              response.encodeURL(request.getContextPath() + "/college/list.xhtml"));
+      menus.put("Add New College",
+              response.encodeURL(request.getContextPath() + "/college/addform.xhtml"));
       session.setAttribute("menus", menus);
     }
 
   }
 
   @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+  protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
           throws ServletException, IOException {
     processRequest(request, response);
   }
 
   @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+  protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
           throws ServletException, IOException {
     processRequest(request, response);
   }
