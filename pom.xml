@@ -66,6 +66,7 @@
           <configLocation>
             ./src/main/resources/kodecamp_checks.xml
           </configLocation>
+          <suppressionsLocation>./src/main/resources/kodecamp_suppressions.xml</suppressionsLocation>
         </configuration>
         
       </plugin>
