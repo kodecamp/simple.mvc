@@ -106,6 +106,20 @@
         <artifactId>mavent-jxr-plugin</artifactId>
         <version>2.3</version>
       </plugin>
+
+      <!-- valnerability check in dependencies -->
+      <plugin>
+        <groupId>org.owasp</groupId>
+        <artifactId>dependency-check-maven</artifactId>
+        <version>5.0.0-M1</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>aggregate</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
     </plugins>
   </reporting>
 
